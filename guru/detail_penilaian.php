@@ -215,25 +215,42 @@ if (isset($_GET['a'])) {
 
 } 
 
-
-
-foreach ($_GET['yes'] as $a => $id_siswa) {
-    if ($a = null) {
-
-    }
+// EDIT
+for ($i=0; $i < count($_GET['yes']); $i++) { 
+    
+    // ID SISWA
+    $id_siswa = $_GET['yes']['id_siswa']; // Ganti ke value yg bnr
     $ket = 1;
     $insert = "insert into tb_nilai values('".$id_tugas."','".$id_guru."','".$mapel."','".$kelas."','".$id_siswa."','".$nilai."','".$ket."','".$date."')";
-    $conn->query($insert)===TRUE;
-    
-}
+    $conn->query($insert);
 
-foreach ($_GET['nilai'] as $b => $nilai) {
-    if ($b = null) {
-
-    }
+    // NILAI
+    $id_siswa = $_GET['nilai']['nilai']; // Ganti ke value yg bnr
     $insert = "insert into tb_nilai values('','".$id_tugas."','".$id_guru."','".$mapel."','".$kelas."','".$id_siswa."','".$nilai."','".$ket."','".$date."')";
-    $conn->query($insert)===TRUE;
+    $conn->query($insert)''
 }
+// EDIT
+
+
+// foreach ($_GET['yes'] as $a => $id_siswa) {
+//     if ($a = null) {
+
+//     }
+//     $ket = 1;
+//     $insert = "insert into tb_nilai values('".$id_tugas."','".$id_guru."','".$mapel."','".$kelas."','".$id_siswa."','".$nilai."','".$ket."','".$date."')";
+//     $conn->query($insert)===TRUE;
+    
+// }
+
+// foreach ($_GET['nilai'] as $b => $nilai) {
+//     if ($b = null) {
+
+//     }
+//     $insert = "insert into tb_nilai values('','".$id_tugas."','".$id_guru."','".$mapel."','".$kelas."','".$id_siswa."','".$nilai."','".$ket."','".$date."')";
+//     $conn->query($insert)===TRUE;
+// }
+
+
 // echo "$id_tugas"; 
 // echo "<br>";
 // echo "$id_guru";
