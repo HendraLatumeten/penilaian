@@ -227,7 +227,7 @@ for ($i=0; $i < count($_GET['yes']); $i++) {
     // NILAI
     $id_siswa = $_GET['nilai']['nilai']; // Ganti ke value yg bnr
     $insert = "insert into tb_nilai values('','".$id_tugas."','".$id_guru."','".$mapel."','".$kelas."','".$id_siswa."','".$nilai."','".$ket."','".$date."')";
-    $conn->query($insert)''
+    $conn->query($insert);
 }
 // EDIT
 
