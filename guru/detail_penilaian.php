@@ -1,4 +1,3 @@
-  
 <?php 
 include "pages/session.php";
 
@@ -34,7 +33,7 @@ while ($row = $get->fetch_assoc()) {
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="logo-area">
-                        <a href="#"><img src="../img/logo/logo.png" alt="" /></a>
+                        <a href="#"><img src="../img/logo/logo1.png" alt="" /></a>
                     </div>
                 </div>
                 <?php   
@@ -46,8 +45,8 @@ while ($row = $get->fetch_assoc()) {
     </div>
 
 
-    <?php $get1 = $koneksi->query("SELECT * FROM tb_tugas JOIN tb_mapel ON tb_tugas.id_mapel=tb_mapel.id_mapel JOIN tb_kelas ON tb_tugas.id_kelas=tb_kelas.id_kelas WHERE id_tugas='$_GET[id];'"); 
-    while ($row = $get1->fetch_assoc()) {
+    <?php $data1= $koneksi->query("SELECT * FROM tb_tugas JOIN tb_mapel ON tb_tugas.id_mapel=tb_mapel.id_mapel JOIN tb_kelas ON tb_tugas.id_kelas=tb_kelas.id_kelas WHERE id_tugas='2'"); 
+    while ($row = $data1->fetch_assoc()) {
         $id_kelas=$row['id_kelas']; 
         $id_mapel=$row['id_mapel']; 
         $id_guru=$row['id_guru']; 
@@ -158,10 +157,17 @@ while ($row = $get->fetch_assoc()) {
                                 <td><?php echo $no;?></td>
                                 <td><?php echo $data["nis"]; ?></td>
                                 <td><?php echo $data["nama"];   ?>
+
+
+
+                                <!-- proses -->
                                 <td><input type="number" class="input-sm"  name="nilai[]" value="" min="10" max="100" >
-                                <input type="hidden" class="input-sm"  name="yes[]" value="<?php echo $data["id_siswa"]; ?>" >
-                          
+                                <input type="number" class="input-sm"  name="yes[]" value="<?php echo $data["id_siswa"]; ?>" >                          
                                 </td>
+                                <!-- endProses -->
+
+
+                                
                             </tr>
                         </tbody>
                         <?php
@@ -192,13 +198,10 @@ if (!$conn) {
 if (isset($_GET['a'])) {
    $date = date("Y-m-d");
    $jam=date("H:i:s");
-   // $nilai = $_GET["nilai"];
+   $nilai = $_GET["nilai"];
    $mapel = $_GET["mapel"];
    $kelas = $_GET["kelas"];
    $id_tugas = $_GET["tugas"];
-   $id_siswa=$_GET[yes];
-   $nilai=$_GET['nilai'];
-
 
 
 
@@ -214,42 +217,43 @@ if (isset($_GET['a'])) {
 
 
 
-
-
-foreach ($nilai as $a => $nilai) {
+foreach ($_GET['yes'] as $a => $id_siswa) {
     if ($a = null) {
 
     }
-
     $ket = 1;
-    //  $update = "UPDATE tb_tugas SET penilaian='$ket' WHERE id_tugas='$id_tugas'";
-    // $conn->query($update)===TRUE;
-
-    $insert = "insert into tb_nilai values('','".$id_tugas."','".$id_guru."','".$mapel."','".$kelas."','".$id_siswa."','".$nilai."','".$ket."','".$date."')";
+    $insert = "insert into tb_nilai values('".$id_tugas."','".$id_guru."','".$mapel."','".$kelas."','".$id_siswa."','".$nilai."','".$ket."','".$date."')";
     $conn->query($insert)===TRUE;
-
+    
 }
 
+foreach ($_GET['nilai'] as $b => $nilai) {
+    if ($b = null) {
 
-
-echo "$id_tugas"; 
-echo "<br>";
-echo "$id_guru";
-echo "<br>";
-echo $mapel;
-echo "<br>";
-echo "$kelas";
-echo "<br>";
-echo "$id_siswa";
-echo "<br>";
-echo "$nilai"; 
-echo "<br>";
+    }
+    $insert = "insert into tb_nilai values('','".$id_tugas."','".$id_guru."','".$mapel."','".$kelas."','".$id_siswa."','".$nilai."','".$ket."','".$date."')";
+    $conn->query($insert)===TRUE;
+}
+// echo "$id_tugas"; 
+// echo "<br>";
+// echo "$id_guru";
+// echo "<br>";
+// echo var_dump($mapel);
+// echo "<br>";
+// echo "$kelas";
+// echo "<br>";
+// echo "$id_siswa";
+// echo "<br>";
+// echo "$nilai"; 
+// echo "<br>";
 // echo "$ket"; 
-echo "<br>";
-echo "$date";
+// echo "<br>";
+// echo "$date";
 
-// echo "<script>alert('Nilai Berhasil DiInput')</script>";
-// echo "<script>location='nilai_siswa.php';</script>";
+
+
+echo "<script>alert('Nilai Berhasil DiInput')</script>";
+echo "<script>location='nilai_siswa.php';</script>";
 
 
 }
@@ -259,3 +263,4 @@ echo "$date";
 </body>
 
 </html>
+
